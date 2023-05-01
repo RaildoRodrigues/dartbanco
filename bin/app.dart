@@ -41,51 +41,44 @@ menuBanco() {
   }
 }
 
-
-menuConta(Conta conta){
-  
-  while(true) {
+menuConta(Conta conta) {
+  while (true) {
     print('-------------------------------------------');
     print('Você esta acessando a conta ${conta.cliente} o que seseha fazer?');
     stdout.write('S: sacar, D: Depositar, E: Extrato, V: Voltar => ');
     String opcao = stdin.readLineSync() as String;
     switch (opcao.toUpperCase()) {
       case 'S':
-        stdout.write('Digite o valor do saque');
+        stdout.write('Digite o valor do saque: ');
         var valor = stdin.readLineSync() as String;
-        try{
+        try {
           double valorSaque = double.parse(valor);
           conta.sacar(valorSaque);
-        }
-        catch (e){
+        } catch (e) {
           print('valor invalido');
         }
         break;
       case 'D':
-        stdout.write('Digite o valor do deposito');
+        stdout.write('Digite o valor do deposito: ');
         var valor = stdin.readLineSync() as String;
-        try{
+        try {
           double valorDeposito = double.parse(valor);
           conta.depositar(valorDeposito);
-        }
-        catch (e){
+        } catch (e) {
           print('valor invalido');
         }
+        break;
+      case 'E':
+        conta.verExtrato();
         break;
       case 'V':
         return;
       default:
         print('Opcao invalida');
         break;
-
     }
-
   }
-
-
-
 }
-
 
 void criarConta(String nomeCliente) {
   Conta novaConta = Conta(nomeCliente);

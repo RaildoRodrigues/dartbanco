@@ -3,7 +3,7 @@ class Conta {
   final String cliente;
   int numeroDaConta = 0;
   double _saldo = 0;
-  
+  List<String> extrato = [];
 
 
   Conta(this.cliente){
@@ -23,6 +23,7 @@ class Conta {
   void depositar(double valor){
     _saldo += valor;
     print('Voce depositou ${toReal(valor)} na sua conta');
+    adicionarLinhaExtrato('D + $valor -> $_saldo');
     verSaldo();
   }
 
@@ -33,8 +34,20 @@ class Conta {
     else{
       _saldo -= valor;
       print('Você sacou ${toReal(valor)}');
+      adicionarLinhaExtrato('S - $valor -> $_saldo');
     }
     verSaldo();
+  }
+
+  void adicionarLinhaExtrato(String linha){
+    extrato.add(linha.padLeft(20, '#'));
+  }
+
+  void verExtrato(){
+    print('##################################');
+    for(String linha in extrato){
+      print(linha);
+    }
   }
 
   @override
